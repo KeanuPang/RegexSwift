@@ -7,31 +7,36 @@
 
 import RegexSwift
 
-let greeting = RegexSwift("hello (world|universe|swift)")
+// MARK: Chinese characters
 
-if let subject = greeting.firstMatch(in: "hello swift")?.captures[0] {
-    print("ohai \(subject)")
-}
+let stringChinese = "這是中文"
+print("//= hasChineseCharacters: \(RegexSwift.hasChineseCharacters(in: stringChinese))")
 
-let result = "hello world".replacingFirst(matching: "h(ello) (\\w+)", with: "H$1, $2!")
-print("//= result: \(result)")
+let stringBopomofo = "ㄎㄫㄐㄑㄬㄉㄊㄋ"
+print("//= hasChineseCharacters: \(RegexSwift.hasChineseCharacters(in: stringBopomofo))")
 
-switch "goodbye world" {
-case RegexSwift("hello (\\w+)"):
-    if let friend = RegexSwift.lastMatch?.captures[0] {
-        print("lovely to meet you, \(friend)!")
-    }
-case RegexSwift("goodbye (\\w+)"):
-    if let traitor = RegexSwift.lastMatch?.captures[0] {
-        print("so sorry to see you go, \(traitor)!")
-    }
-default:
-    break
-}
+let stringChinesePunctuation = "＋"
+print("//= hasCJKPunctuations: \(RegexSwift.hasCJKPunctuations(in: stringChinesePunctuation))")
 
-let totallyUniqueExamples = RegexSwift("^(hello|foo).*$", options: [.caseInsensitive, .anchorsMatchLines])
-let multilineText = "hello world\ngoodbye world\nFOOBAR\n"
-let matchingLines = totallyUniqueExamples.allMatches(in: multilineText).map { $0.matchedSubstring }
-// ["hello world", "FOOBAR"]
+// MARK: Japanese characters
 
-print(matchingLines)
+let stringJapanese = "これは日本人です"
+print("//= hasJapaneseCharacters: \(RegexSwift.hasJapaneseCharacters(in: stringJapanese))")
+
+// MARK: Koren characters
+
+let stringKorean = "이것은 한국어입니다"
+print("//= hasKoreanCharacters: \(RegexSwift.hasKoreanCharacters(in: stringKorean))")
+
+// MARK: CJK characters
+
+let stringCJK = "這是中文,これは日本人です,이것은 한국어입니다"
+print("//= hasCJKCharacters: \(RegexSwift.hasCJKCharacters(in: stringCJK))")
+
+// MARK: Others
+
+let string = "test text"
+print("//= non CJK text: \(RegexSwift.hasChineseCharacters(in: string) == false)")
+
+let stringPunctuation = ","
+print("//= non CJK punctuation: \(RegexSwift.hasCJKPunctuations(in: stringPunctuation) == false)")
