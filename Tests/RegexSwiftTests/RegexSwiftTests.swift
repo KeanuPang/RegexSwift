@@ -97,7 +97,7 @@ final class RegexTests: XCTestCase {
         // U+221E INFINITY
         // U+1D11E MUSICAL SYMBOL G CLEF
         let string = "\u{61}\u{65}\u{301}\u{221E}\u{1D11E}"
-        let infinity = RegexSwift("(\u{221E})").firstMatch(in: string)!.captures[0]!
+        let infinity = RegexSwift("(\u{221E})").firstMatch(in: string)!.captures[0]
         let rangeOfInfinity = string.range(of: infinity)!
         let location = string.distance(from: string.startIndex, to: rangeOfInfinity.lowerBound)
         let length = string.distance(from: rangeOfInfinity.lowerBound, to: rangeOfInfinity.upperBound)

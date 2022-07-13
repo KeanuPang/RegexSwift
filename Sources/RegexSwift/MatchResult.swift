@@ -44,7 +44,7 @@ public struct MatchResult {
     ///
     ///     regex.firstMatch(in: "ab")?.captures // [Optional("a"), Optional("b")]
     ///     regex.firstMatch(in: "b")?.captures // [nil, Optional("b")]
-    public var captures: [Substring?] {
+    public var captures: [Substring] {
         return _result.captures
     }
 
@@ -80,8 +80,8 @@ private final class _MatchResult {
 
     lazy var range: Range<String.Index> = Range(self.result.range, in: string)!
 
-    lazy var captures: [Substring?] = self.captureRanges.map { range in
-        range.map { self.string[$0] }
+    lazy var captures: [Substring] = self.captureRanges.map { range in
+        range.map { self.string[$0] } ?? Substring()
     }
 
     lazy var captureRanges: [Range<String.Index>?] = self.result.ranges.dropFirst().map { Range($0, in: self.string) }
