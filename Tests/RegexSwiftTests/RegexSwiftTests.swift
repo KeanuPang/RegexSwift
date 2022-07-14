@@ -85,9 +85,9 @@ final class RegexTests: XCTestCase {
         XCTAssertEqual(regex.firstMatch(in: "b")?.captures[1], "b")
     }
 
-    func testRegexOptionatCaptureGroupsReturnNilForUnmatchedCaptures() {
+    func testRegexOptionatCaptureGroupsReturnEmptySubstringForUnmatchedCaptures() {
         let regex = RegexSwift("(a)?(b)")
-        XCTAssertNil(regex.firstMatch(in: "b")?.captures[0])
+        XCTAssertEqual(regex.firstMatch(in: "b")?.captures[0], Substring())
     }
 
     func testRegexCaptureRangesCorrectlyConvertFromUnderlyingIndexType() {

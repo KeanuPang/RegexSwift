@@ -19,7 +19,7 @@ extension RegexTests {
         ("testRegexMatchesSingleCaptureGroup", testRegexMatchesSingleCaptureGroup),
         ("testRegexMatchesWithNoCaptureGroups", testRegexMatchesWithNoCaptureGroups),
         ("testRegexOptionatCaptureGroupsMaintainCapturePositionRegardlessOfOptionality", testRegexOptionatCaptureGroupsMaintainCapturePositionRegardlessOfOptionality),
-        ("testRegexOptionatCaptureGroupsReturnNilForUnmatchedCaptures", testRegexOptionatCaptureGroupsReturnNilForUnmatchedCaptures),
+        ("testRegexOptionatCaptureGroupsReturnEmptySubstringForUnmatchedCaptures", testRegexOptionatCaptureGroupsReturnEmptySubstringForUnmatchedCaptures),
         ("testRegexProvidesAccessToCaptureRanges", testRegexProvidesAccessToCaptureRanges),
         ("testRegexProvidesAccessToTheEntireMatchedString", testRegexProvidesAccessToTheEntireMatchedString),
         ("testRegexProvidesAccessToTheMatchedRange", testRegexProvidesAccessToTheMatchedRange),

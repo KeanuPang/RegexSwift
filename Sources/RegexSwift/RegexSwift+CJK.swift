@@ -5,13 +5,13 @@
 //  Created by Keanu Pang on 2022/7/13.
 //
 
-private enum PatternCJK {
+public enum PatternCJK {
     case chinese
     case japanese
     case korean
     case cjk
 
-    var regexPattern: StaticString {
+    public var regexPattern: StaticString {
         switch self {
         case .chinese:
             return "\\p{Han}|\\p{Bopomofo}"
@@ -40,26 +40,34 @@ private enum BlockPunctuationsCJK: String, CaseIterable {
 
 extension RegexSwift {
     public static func hasChineseCharacters(in string: String) -> Bool {
-        return RegexSwift(PatternCJK.chinese.regexPattern).matches(string)
+        return byPatternCJK(pattern: PatternCJK.chinese).matches(string)
     }
 
     public static func hasJapaneseCharacters(in string: String) -> Bool {
-        return RegexSwift(PatternCJK.japanese.regexPattern).matches(string)
+        return byPatternCJK(pattern: PatternCJK.japanese).matches(string)
     }
 
     public static func hasKoreanCharacters(in string: String) -> Bool {
-        return RegexSwift(PatternCJK.korean.regexPattern).matches(string)
+        return byPatternCJK(pattern: PatternCJK.korean).matches(string)
     }
 
     public static func hasCJKCharacters(in string: String) -> Bool {
-        return RegexSwift(PatternCJK.cjk.regexPattern).matches(string)
+        return byPatternCJK(pattern: PatternCJK.cjk).matches(string)
     }
 
     public static func hasCJKPunctuations(in string: String) -> Bool {
+        return byPunctuationsCJK().matches(string)
+    }
+
+    public static func byPatternCJK(pattern: PatternCJK) -> RegexSwift {
+        return RegexSwift(pattern.regexPattern)
+    }
+
+    public static func byPunctuationsCJK() -> RegexSwift {
         do {
-            return try RegexSwift(string: BlockPunctuationsCJK.regexPattern).matches(string)
+            return try RegexSwift(string: BlockPunctuationsCJK.regexPattern)
         } catch {
-            return false
+            return RegexSwift("")
         }
     }
 }
